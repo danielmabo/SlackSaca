@@ -2,7 +2,7 @@ from SlackSaca_App.models import Team
 from slackclient import SlackClient
 from django.core.management.base import BaseCommand
 import time
-
+import sys
 
 
 class Command(BaseCommand):
@@ -15,7 +15,7 @@ class Command(BaseCommand):
             while True:
                 events = client.rtm_read()
                 for event in events:
-                    if event['type']=='message' and event['text']=='hi':
+                    if 'type' in event and event['type']=='message' and event['text']=='hi':
                         client.rtm_send_message(
                             event['channel'],
                             "¡TriSeco!"
