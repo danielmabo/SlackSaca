@@ -21,13 +21,10 @@ def slack_oauth(request):
     url = 'https://slack.com/api/oauth.access'
     json_response = requests.get(url, params)
     #data = json.loads(json.dumps(json_response))
-    """Team.objects.create(
+    Team.objects.create(
         name=json_response['name'],
         team_id=json_response['team_id'],
         bot_user_id=json_response['bot']['bot_user_id'],
         bot_access_token=json_response['bot']['bot_access_token']
-    )"""
-    #x = ''
-    #for key in data: x += key
-    #return HttpResponse(x + ' Bot added to your Slack team!')
-    return HttpResponse( json_response.text)
+    )
+    return HttpResponse('Bot added to your Slack team!')
