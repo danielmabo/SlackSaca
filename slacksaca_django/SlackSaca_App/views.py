@@ -5,7 +5,7 @@ import json
 
 def index(request):
     client_id = settings.SLACK_CLIENT_ID
-    return render(request, 'templates/landing.html', {'client_id': client_id})
+    return render(request, 'landing.html', {'client_id': client_id})
 
 
 def slack_oauth(request):
