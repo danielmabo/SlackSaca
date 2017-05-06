@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone #puede no ser necesario
+
 class Team(models.Model):
     name = models.CharField(max_length=200)
     team_id = models.CharField(max_length=20)
@@ -8,7 +9,7 @@ class Team(models.Model):
 
 class User(models.Model):
     user_name = models.CharField(max_length=100)
-    knows = models.Charfield(max_length=200)
+    knows = models.CharField(max_length=200)
     in_team = models.ForeignKey('Team') #Referencia a qué equipo pertenece (?)
 
 class Question(models.Model):
