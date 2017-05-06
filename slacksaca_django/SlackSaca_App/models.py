@@ -6,7 +6,7 @@ class Team(models.Model):
     team_id = models.CharField(max_length=20, primary_key=True)
     bot_user_id = models.CharField(max_length=20)
     bot_access_token = models.CharField(max_length=100)
-
+"""
 class User(models.Model):
     user_name = models.CharField(max_length=100, primary_key=True)
     knows = models.CharField(max_length=10000)
@@ -25,3 +25,4 @@ class Knowledge (models.Model):
     username = models.ForeignKey('User', primary_key=True)
     inteam = models.ForeignKey('User', primary_key=True)
     unique_together =(('sabiduria', 'username', 'inteam'),)
+"""
