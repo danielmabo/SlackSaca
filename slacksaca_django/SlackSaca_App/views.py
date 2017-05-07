@@ -10,6 +10,15 @@ def index(request):
     return render(request, 'landing.html', {'client_id': client_id})
 
 
+def AfegirPersona(informacio):
+
+    """x = ''
+    for e in Team.objects.filter(team_id="cxvcvcx"):
+        x+=e.name
+    """
+    return informacio.text
+
+
 def slack_oauth(request):
     code = request.GET.get('code')
 
@@ -27,4 +36,4 @@ def slack_oauth(request):
         bot_user_id=json_response['bot']['bot_user_id'],
         bot_access_token=json_response['bot']['bot_access_token']
     )
-    return HttpResponse('Bot added to your Slack team!')
+    return prova_taules()
