@@ -1,22 +1,13 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.http import HttpResponse
-from .models import Team
+from .models import Team, User
 
 import json, requests
 
 def index(request):
     client_id = settings.SLACK_CLIENT_ID
     return render(request, 'landing.html', {'client_id': client_id})
-
-
-def AfegirPersona(informacio):
-
-    """x = ''
-    for e in Team.objects.filter(team_id="cxvcvcx"):
-        x+=e.name
-    """
-    return informacio.text
 
 
 def slack_oauth(request):
@@ -36,4 +27,16 @@ def slack_oauth(request):
         bot_user_id=json_response['bot']['bot_user_id'],
         bot_access_token=json_response['bot']['bot_access_token']
     )
-    return prova_taules()
+
+    url2 = 'https://slack.com/api/users.list'
+    params = {
+        'token': json_response['bot']['bot_access_token'],
+    }
+    json_request2 = requests.get(url2, params)
+    json_response2 = json.loads(json_request2.text)
+    for e in json_response2['members']:
+        User.objects.create(
+            user_name=e['id'],
+            in_team=e['team_id']
+        )
+    return HttpResponse('asd')

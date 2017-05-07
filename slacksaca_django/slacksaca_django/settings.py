@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-
     'SlackSaca_App.apps.SlacksacaAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -123,5 +122,5 @@ STATIC_URL = '/static/'
 
 # SLACK API TOKENS
 
-SLACK_CLIENT_ID = "167028109587.179168706625"
-SLACK_CLIENT_SECRET = "365cab071826d3280271fff6f1937b23"
+SLACK_CLIENT_ID = "167028109587.179245581537"
+SLACK_CLIENT_SECRET = "480be3ecf1cfbf87832579f7d8db3e46"
