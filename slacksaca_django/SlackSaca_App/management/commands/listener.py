@@ -18,6 +18,7 @@ class Command(BaseCommand):
         to_add = re.compile(r'^add to saca ([^=]*)')
         to_del = re.compile(r'^delete from saca ([^=]*)')
         my_saca = re.compile(r'^my saca')
+        comando_help = re.compile(r'^help')
 
         if client.rtm_connect():
             while True:
@@ -53,7 +54,7 @@ class Command(BaseCommand):
                                     if event['user'] != f.user_name:
                                         client.rtm_send_message(
                                             x,
-                                            'Hi! Someone is asking from ' + quest.group(1) + '\n. The question is the following:\n' + quest.group(2) + '\n. If u want to answer please use the next command: answer to ' + quest.group(2) + ';[answer]'
+                                            'Hi! Someone is asking from ' + quest.group(1) + '\n. The question is the following:\n' + quest.group(2) + '\n. If u want to answer please use the next command: answer to:'+ quest.group(2) +';[answer]'
                                         )
 
                                 client.rtm_send_message(
@@ -105,6 +106,21 @@ class Command(BaseCommand):
                                     "¡TriSeco! Your hability have been deleted from your saca"
                                 )
 
+                            elif comando_help.match(event['text']):
+                                x = "Hi! My name is SlackSaca, and I am tool created to communicate people with questions in Hackathons with people which knows the answers. You can use the following commands:\n"
+                                x += "*IMPORTANT:* The first command you have to do is *'add to saca [topic]'* to be able to ask your questions ot other people and also to be able to recibe questions and help.\n"
+                                x += "*create new question:[topic];[question] ->* This command allows you to find someone who knows about the topic specified.\n"
+                                x += "*answer to:[question recieved];[answer] ->* This command is used to answer a question you recieved.\n"
+                                x += "*add to saca [topic] ->* This command is used to add a topic you know about in your saca (an imaginary recipient which contains all the information you are familiaritzated).\n"
+                                x += "*delete from saca [topic] ->* This command is used to remove a topic you don't want to have in the saca anymore.\n"
+                                x += "*my saca ->* Returns all the topics you have in the saca. \n"
+
+                                client.rtm_send_message(
+                                    event['channel'],
+                                    x
+                                )
+
+
                             elif my_saca.match(event['text']):
                                 x = '';
                                 for e in Knowledge.objects.filter(user_name=event['user']):
@@ -120,6 +136,7 @@ class Command(BaseCommand):
                             client.rtm_send_message(
                                 event['channel'],
                                 "Hi! My name is SlackSaca, and I am tool created to communicate people with questions in Hackathons with people which knows the answers. Please, tip \'add to saca [your skills separated by commas] to start.\n"
+
                             )
-                            #En caso contrario saludamos al usuario
+
                 time.sleep(1)
